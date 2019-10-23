@@ -1,0 +1,21 @@
+version: 2
+
+jobs:
+  push:
+    docker:
+      - image: circleci/buildpack-deps:stretch
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Build Docker image
+          command: |
+            echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+            make push REPOSITORY=$DOCKERHUB_USERNAME/sentry
+
+workflows:
+  version: 2
+
+  commit:
+    jobs:
+      - push
