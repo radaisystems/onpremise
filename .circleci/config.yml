@@ -11,7 +11,7 @@ jobs:
           name: Build Docker image
           command: |
             echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
-            make push REPOSITORY=$DOCKERHUB_USERNAME/sentry
+            make push REPOSITORY=radaisystems/sentry
 
 workflows:
   version: 2
